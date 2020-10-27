@@ -1,5 +1,6 @@
 from app import app
 from flask import request
+from .util.create_response import create_cipher_text_response, create_plain_text_response
 
 
 @app.route('/')
@@ -12,12 +13,24 @@ def index():
 
 @app.route('/encrypt/text/rsa', methods=['POST'])
 def encrypt_text_rsa():
-    pass
+    json_request = request.get_json()
+    query = json_request['message']
+    key = json_request['key']
+    encrypted_text = query  # TODO
+
+    response = create_cipher_text_response(encrypted_text)
+    return response
 
 
 @app.route('/encrypt/text/elgamal', methods=['POST'])
 def encrypt_text_elgamal():
-    pass
+    json_request = request.get_json()
+    query = json_request['message']
+    key = json_request['key']
+    encrypted_text = query  # TODO
+
+    response = create_cipher_text_response(encrypted_text)
+    return response
 
 
 ''' Text decryption '''
@@ -25,9 +38,21 @@ def encrypt_text_elgamal():
 
 @app.route('/decrypt/text/rsa', methods=['POST'])
 def decrypt_text_rsa():
-    pass
+    json_request = request.get_json()
+    query = json_request['message']
+    key = json_request['key']
+    decrypted_text = query  # TODO
+
+    response = create_plain_text_response(decrypted_text)
+    return response
 
 
 @app.route('/decrypt/text/elgamal', methods=['POST'])
 def decrypt_text_elgamal():
-    pass
+    json_request = request.get_json()
+    query = json_request['message']
+    key = json_request['key']
+    decrypted_text = query  # TODO
+
+    response = create_plain_text_response(decrypted_text)
+    return response
