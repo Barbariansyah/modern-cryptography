@@ -11,9 +11,21 @@ Prime Number Checker
 '''
 def is_prime(a):
     if a > 1:
-        for i in range(2, a):
+        for i in range(3, a, 2):
             if a % i == 0:
                 return False
         return True
+    elif a == 2:
+        return True
     else:
         return False
+
+'''
+Multiplicative Inverse
+'''
+def multiplicative_inverse(e, phi) : 
+    e = e % phi; 
+    for x in range(1, phi) : 
+        if ((e * x) % phi == 1) : 
+            return x 
+    return 1
