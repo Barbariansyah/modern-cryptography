@@ -1,4 +1,5 @@
 from app.util.util import *
+from app.cipher.rsa import *
 
 if __name__ == "__main__":
     '''
@@ -12,5 +13,10 @@ if __name__ == "__main__":
     '''
     prime generator
     '''
-    prime = generate_prime(64, 2)
-    print(prime)
+    # print(generate_prime(48))
+    # print(generate_prime(48))
+    # print(generate_prime(48))
+    '''
+    key generation
+    '''
+    generate_keys(48)

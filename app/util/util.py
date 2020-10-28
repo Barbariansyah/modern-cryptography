@@ -1,4 +1,5 @@
 import math
+import random
 
 '''
 Greatest Common Divisor
@@ -33,19 +34,24 @@ def binary_to_int(binary):
 '''
 Multiplicative Inverse
 '''
-def multiplicative_inverse(e, totient) : 
-    e = e % totient; 
-    for x in range(1, totient) : 
-        if ((e * x) % totient == 1) : 
-            return x 
-    return 1
+def multiplicative_inverse(a, b):
+    if a <= b:
+        return ValueError('not a > b')
+    x0, x1, y0, y1 = 1, 0, 0, 1
+    while a != 0:
+        q, b, a = b // a, a, b % a
+        x0, x1 = x1, x0 - q * x1
+        y0, y1 = y1, y0 - q * y1
+    return  b, y0, x0
 
 '''
 generate prime up to 48 bit
 in: size in bit, random seed
 '''
-def generate_prime(size, seed):
+def generate_prime(size):
+    change = random.randint(1, size-1)
     start_binary = '1' + '0' * (size - 1)
+    start_binary = start_binary[:change] + '1' + start_binary[change:]
     prime = binary_to_int(start_binary)
     
     if prime % 2 == 0:
@@ -55,3 +61,15 @@ def generate_prime(size, seed):
         prime += 2
     
     return prime
+
+'''
+decimal to hexadecimal string
+'''
+def decimal_to_hex(d):
+    return hex(d)[2:]
+
+'''
+hexadeximal string to decimal
+'''
+def hex_to_decimal(h):
+    return int(h, 16)
