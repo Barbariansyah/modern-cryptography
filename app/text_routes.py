@@ -3,6 +3,7 @@ from flask import request
 from .util.create_response import create_cipher_text_response, create_plain_text_response
 from .cipher.elgamal import encrypt_elgamal, decrypt_elgamal
 from .cipher.rsa import *
+import time
 
 
 @app.route('/')
@@ -19,9 +20,12 @@ def encrypt_text_rsa():
     message = json_request['message']
     public_key = json_request['public_key']
     message = bytes(message, encoding='UTF-8')
-    encrypted_message = encrypt_rsa(message, public_key)
 
-    response = create_cipher_text_response(encrypted_message)
+    start_time = time.time()
+    encrypted_message = encrypt_rsa(message, public_key)
+    time_needed = time.time() - start_time
+
+    response = create_cipher_text_response(encrypted_message, time_needed)
     return response
 
 
@@ -33,9 +37,11 @@ def encrypt_text_elgamal():
 
     query = bytes(query, 'utf-8')
 
-    encrypted_text = encrypt_elgamal(query, key)
+    start_time = time.time()
+    encrypted_message = encrypt_elgamal(message, public_key)
+    time_needed = time.time() - start_time
 
-    response = create_cipher_text_response(encrypted_text)
+    response = create_cipher_text_response(encrypted_message, time_needed)
     return response
 
 
@@ -48,9 +54,12 @@ def decrypt_text_rsa():
     message = json_request['message']
     private_key = json_request['private_key']
     message = bytes(message, encoding='UTF-8')
-    decrypted_message = decrypt_rsa(message, private_key)
 
-    response = create_plain_text_response(decrypted_message)
+    start_time = time.time()
+    decrypted_message = decrypt_rsa(message, private_key)
+    time_needed = time.time() - start_time
+
+    response = create_plain_text_response(decrypted_message, time_needed)
     return response
 
 
@@ -61,5 +70,9 @@ def decrypt_text_elgamal():
     key = json_request['key']
     decrypted_text = decrypt_elgamal(query, key)
 
-    response = create_plain_text_response(decrypted_text)
+    start_time = time.time()
+    decrypted_message = decrypt_elgamal(message, private_key)
+    time_needed = time.time() - start_time
+
+    response = create_plain_text_response(decrypted_message, time_needed)
     return response
