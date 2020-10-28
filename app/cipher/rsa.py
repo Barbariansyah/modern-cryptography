@@ -27,7 +27,6 @@ def generate_rsa_keys(size):
     return (n, d, e)
 
 def encrypt_rsa(plain_bytes, public_key):
-    print(public_key)
     key = public_key.split('\n')
     e = hex_to_decimal(key[1])
     n = hex_to_decimal(key[2])
@@ -37,8 +36,6 @@ def encrypt_rsa(plain_bytes, public_key):
         temp = pow(b, e, n)
         decimals.append(temp)
         encrypted_content.append(decimal_to_hex(temp))
-    print(decimals)
-    print(encrypted_content)
     encrypted_content = " ".join(x for x in encrypted_content)
     return encrypted_content      
 
@@ -52,6 +49,5 @@ def decrypt_rsa(cipher_bytes, private_key):
     for c in cipher_list:
         c_integer = hex_to_decimal(c)
         decrypted_content.append(pow(c_integer, d, n))
-    print(decrypted_content)
     decrypted_content_bytes = bytes(decrypted_content)
     return decrypted_content_bytes 
