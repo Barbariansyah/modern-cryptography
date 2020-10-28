@@ -30,7 +30,7 @@ def generate_diffie_key():
 
 @app.route('/key/rsa', methods=['GET'])
 def generate_rsa_key():
-    n, d, e = generate_rsa_keys(48)
+    n, d, e = generate_rsa_keys(128)
     pub_key = (e, n)
     pri_key = (d, n)
 
@@ -46,7 +46,7 @@ def generate_rsa_key():
 
 @app.route('/key/elgamal', methods=['GET'])
 def generate_elgamal_key():
-    pub_key, pri_key = generate_elgamal_keys(48)
+    pub_key, pri_key = generate_elgamal_keys(128)
     pub_key = [(decimal_to_hex(i) + ' \n ') for i in pub_key]
     pub_key = ''.join(pub_key)
 

@@ -15,9 +15,7 @@ def create_cipher_text_response(cipher_text):
     n = 5
     if (type(cipher_text) == bytes):
         cipher_text = "".join([chr(i) for i in cipher_text])
-    splitted_ciphertext = [cipher_text[i:i+n]
-                           for i in range(0, len(cipher_text), n)]
-    return ({'ciphertext': cipher_text, 'splitted_ciphertext': splitted_ciphertext})
+    return ({'ciphertext': cipher_text})
 
 
 def create_file_response(filename, cipher_text):
