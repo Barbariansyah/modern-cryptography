@@ -9,6 +9,7 @@ def gcd(a, b):
         a, b = b, a % b
     return a
 
+
 '''
 Prime Number Checker
 '''
@@ -25,11 +26,13 @@ def is_prime(n):
                 return False
         return True
 
+
 '''
 binary to int
 '''
 def binary_to_int(binary):
     return int(binary, 2)
+
 
 '''
 Multiplicative Inverse
@@ -42,7 +45,8 @@ def multiplicative_inverse(a, b):
         q, b, a = b // a, a, b % a
         x0, x1 = x1, x0 - q * x1
         y0, y1 = y1, y0 - q * y1
-    return  b, y0, x0
+    return b, y0, x0
+
 
 '''
 generate prime up to 48 bit
@@ -53,14 +57,15 @@ def generate_prime(size):
     start_binary = '1' + '0' * (size - 1)
     start_binary = start_binary[:change] + '1' + start_binary[change:]
     prime = binary_to_int(start_binary)
-    
+
     if prime % 2 == 0:
         prime += 1
 
     while not is_prime(prime):
         prime += 2
-    
+
     return prime
+
 
 '''
 decimal to hexadecimal string
@@ -68,8 +73,23 @@ decimal to hexadecimal string
 def decimal_to_hex(d):
     return hex(d)[2:]
 
+
 '''
 hexadeximal string to decimal
 '''
 def hex_to_decimal(h):
     return int(h, 16)
+
+
+'''
+modular exponentiation, taken from https://github.com/csknk/fast-modular-exponentiation
+'''
+def power(b, e, m):
+    r = 1
+    if 1 & e:
+        r = b
+    while e:
+        e >>= 1
+        b = (b * b) % m
+        if e & 1: r = (r * b) % m
+    return r

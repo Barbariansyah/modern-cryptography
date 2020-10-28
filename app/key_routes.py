@@ -1,5 +1,9 @@
 from app import app
 from flask import request
+from app.cipher.elgamal import generate_elgamal_keys
+from app.cipher.rsa import generate_keys
+from app.util.util import decimal_to_hex
+from app.util.create_response import create_key_response
 
 
 @app.route('/key')
@@ -10,16 +14,35 @@ def index_key():
 ''' Key generation '''
 
 
-@app.route('/key/diffie', methods=['POST'])
+@app.route('/key/diffie', methods=['GET'])
 def generate_diffie_key():
     pass
 
 
-@app.route('/key/rsa', methods=['POST'])
+@app.route('/key/rsa', methods=['GET'])
 def generate_rsa_key():
-    pass
+    n, d, e = generate_keys(48)
+    pub_key = (e, n)
+    pri_key = (d, n)
+
+    pub_key = [(decimal_to_hex(i) + ' \n ') for i in pub_key]
+    pub_key = ''.join(pub_key)
+
+    pri_key = [(decimal_to_hex(i) + ' \n ') for i in pri_key]
+    pri_key = ''.join(pri_key)
+
+    response = create_key_response(pub_key, pri_key)
+    return response
 
 
-@app.route('/key/elgamal', methods=['POST'])
+@app.route('/key/elgamal', methods=['GET'])
 def generate_elgamal_key():
-    pass
+    pub_key, pri_key = generate_elgamal_keys(48)
+    pub_key = [(decimal_to_hex(i) + ' \n ') for i in pub_key]
+    pub_key = ''.join(pub_key)
+
+    pri_key = [(decimal_to_hex(i) + ' \n ') for i in pri_key]
+    pri_key = ''.join(pri_key)
+
+    response = create_key_response(pub_key, pri_key)
+    return response
