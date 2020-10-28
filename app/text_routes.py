@@ -1,6 +1,7 @@
 from app import app
 from flask import request
 from .util.create_response import create_cipher_text_response, create_plain_text_response
+from .cipher.elgamal import encrypt_elgamal, decrypt_elgamal
 
 
 @app.route('/')
@@ -27,7 +28,10 @@ def encrypt_text_elgamal():
     json_request = request.get_json()
     query = json_request['message']
     key = json_request['key']
-    encrypted_text = query  # TODO
+
+    query = bytes(query, 'utf-8')
+
+    encrypted_text = encrypt_elgamal(query, key)
 
     response = create_cipher_text_response(encrypted_text)
     return response
@@ -52,7 +56,7 @@ def decrypt_text_elgamal():
     json_request = request.get_json()
     query = json_request['message']
     key = json_request['key']
-    decrypted_text = query  # TODO
+    decrypted_text = decrypt_elgamal(query, key)
 
     response = create_plain_text_response(decrypted_text)
     return response
