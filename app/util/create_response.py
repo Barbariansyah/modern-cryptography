@@ -32,7 +32,13 @@ def create_file_response(filename, cipher_text):
 
 
 def create_key_response(pub_key, pri_key):
-    pub_key = '-----BEGIN PUBLIC KEY----- \n ' + pub_key + '-----END PUBLIC KEY----- \n'
-    pri_key = '-----BEGIN RSA PRIVATE KEY----- \n ' + pri_key + '-----END RSA PRIVATE KEY----- \n'
+    pub_key = '-----BEGIN PUBLIC KEY----- \n ' + \
+        pub_key + '-----END PUBLIC KEY----- \n'
+    pri_key = '-----BEGIN RSA PRIVATE KEY----- \n ' + \
+        pri_key + '-----END RSA PRIVATE KEY----- \n'
 
     return ({'public_key': pub_key, 'private_key': pri_key})
+
+
+def create_diffie_response(key):
+    return ({'secret_key': key})
