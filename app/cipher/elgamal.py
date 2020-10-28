@@ -1,5 +1,6 @@
 import random
 from app.util.util import generate_prime, power
+from Crypto.Util import number
 '''
 key generator
 1. pick p (prime number)
@@ -11,7 +12,7 @@ key generator
 
 
 def generate_elgamal_keys(size):
-    p = generate_prime(size)
+    p = number.getPrime(size)
     g = random.randint(1, p-1)
     x = random.randint(1, p-2)
 

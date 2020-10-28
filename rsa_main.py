@@ -1,5 +1,6 @@
 from app.util.util import *
 from app.cipher.rsa import *
+from Crypto.Util import number
 
 if __name__ == "__main__":
     '''
@@ -16,7 +17,9 @@ if __name__ == "__main__":
     # print(generate_prime(48))
     # print(generate_prime(48))
     # print(generate_prime(48))
+    # print(number.getPrime(128))
+    # print(number.getPrime(128))
     '''
     key generation
     '''
-    generate_keys(48)
+    # print(generate_rsa_keys(128))

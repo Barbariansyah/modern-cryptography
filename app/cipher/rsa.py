@@ -1,5 +1,6 @@
 import random
 from app.util.util import *
+from Crypto.Util import number
 '''
 key generator
 1. pick p and q (prime number)
@@ -7,9 +8,9 @@ key generator
 3. pick e and d
 '''
 
-def generate_keys(size):
-    p = generate_prime(size)
-    q = generate_prime(size)
+def generate_rsa_keys(size):
+    p = number.getPrime(size)
+    q = number.getPrime(size)
     n = p * q
 
     phi = (p - 1) * (q - 1)
@@ -24,4 +25,4 @@ def generate_keys(size):
 
     return (n, d, e)
 
-
+# def encrypt_rsa()
