@@ -14,7 +14,7 @@ def generate_diffie_keys(n, g, x, y):
     big_x = power(g, x, n)
     big_y = power(g, y, n)
 
-    a_k = power(big_y, x, n) 
+    a_k = power(big_y, x, n)
     b_k = power(big_x, y, n)
 
     assert a_k == b_k, "a_k should be the same with b_k"

@@ -1,6 +1,6 @@
 import math
 import random
-
+from bitarray import bitarray
 '''
 Greatest Common Divisor
 '''
@@ -35,9 +35,9 @@ def binary_to_int(binary):
 
 
 '''
-Multiplicative Inverse
+extended euclidian
 '''
-def multiplicative_inverse(a, b):
+def extended_euclidian(a, b):
     if a <= b:
         return ValueError('not a > b')
     x0, x1, y0, y1 = 1, 0, 0, 1
@@ -74,15 +74,12 @@ def decimal_to_hex(d):
     return hex(d)[2:]
 
 
-'''
-hexadeximal string to decimal
-'''
 def hex_to_decimal(h):
     return int(h, 16)
 
 
 '''
-modular exponentiation, taken from https://github.com/csknk/fast-modular-exponentiation
+modular exponentiation, inspired from https://github.com/csknk/fast-modular-exponentiation
 '''
 def power(b, e, m):
     r = 1
@@ -91,5 +88,31 @@ def power(b, e, m):
     while e:
         e >>= 1
         b = (b * b) % m
-        if e & 1: r = (r * b) % m
+        if e & 1:
+            r = (r * b) % m
     return r
+
+
+'''
+bytes to bits transformation
+'''
+def bytes_to_bits(bytes_input):
+    temp = bitarray()
+    temp.frombytes(bytes_input)
+    return temp.to01()
+
+
+def bits_to_bytes(bit_input):
+    temp = bitarray(bit_input)
+    return temp.tobytes()
+
+
+'''
+bits to integer transformation
+'''
+def int_to_binary(integer):
+    return format(integer, '08b')
+
+
+def binary_to_int(binary):
+    return int(binary, 2)
