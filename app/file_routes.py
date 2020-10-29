@@ -37,7 +37,7 @@ def encrypt_file_rsa():
 @app.route('/encrypt/file/elgamal', methods=['POST'])
 def encrypt_file_elgamal():
     file = request.files['file']
-    key = request.form['key']
+    key = request.form['public_key']
     filename, file_context = handle_ascii_file(file)
 
     start_time = time.time()
@@ -76,7 +76,7 @@ def decrypt_file_rsa():
 @app.route('/decrypt/file/elgamal', methods=['POST'])
 def decrypt_file_elgamal():
     file = request.files['file']
-    key = request.form['key']
+    key = request.form['private_key']
     filename, file_context = handle_ascii_file(file)
     file_context = file_context.decode()
 

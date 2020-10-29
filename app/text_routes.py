@@ -32,10 +32,10 @@ def encrypt_text_rsa():
 @app.route('/encrypt/text/elgamal', methods=['POST'])
 def encrypt_text_elgamal():
     json_request = request.get_json()
-    query = json_request['message']
-    key = json_request['key']
+    message = json_request['message']
+    public_key = json_request['public_key']
 
-    query = bytes(query, 'utf-8')
+    message = bytes(message, 'utf-8')
 
     start_time = time.time()
     encrypted_message = encrypt_elgamal(message, public_key)
@@ -66,9 +66,10 @@ def decrypt_text_rsa():
 @app.route('/decrypt/text/elgamal', methods=['POST'])
 def decrypt_text_elgamal():
     json_request = request.get_json()
-    query = json_request['message']
-    key = json_request['key']
-    decrypted_text = decrypt_elgamal(query, key)
+    message = json_request['message']
+    private_key = json_request['private_key']
+
+    message = bytes(message, 'utf-8')
 
     start_time = time.time()
     decrypted_message = decrypt_elgamal(message, private_key)
