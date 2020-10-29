@@ -1,6 +1,6 @@
 from app import app
 from flask import request, send_file, jsonify
-from .util.create_response import create_file_response
+from .util.create_response import create_file_response, create_file_url_response
 from .util.handle_file import handle_file, handle_ascii_file
 from .cipher.elgamal import encrypt_elgamal, decrypt_elgamal
 from .cipher.rsa import *
@@ -28,10 +28,10 @@ def encrypt_file_rsa():
 
     complete_filename = create_file_response(
         filename, encrypted_context)
-    
-    file_size = os.stat(filename).st_size
 
-    return send_file(complete_filename)
+    file_size = os.stat(complete_filename).st_size
+
+    return create_file_url_response(complete_filename, file_size)
 
 
 @app.route('/encrypt/file/elgamal', methods=['POST'])
@@ -46,10 +46,10 @@ def encrypt_file_elgamal():
 
     complete_filename = create_file_response(
         filename, encrypted_context)
-    
-    file_size = os.stat(filename).st_size
 
-    return send_file(complete_filename)
+    file_size = os.stat(complete_filename).st_size
+
+    return create_file_url_response(complete_filename, file_size)
 
 
 ''' File decryption '''
@@ -67,10 +67,10 @@ def decrypt_file_rsa():
 
     complete_filename = create_file_response(
         filename, decrypted_context)
-    
-    file_size = os.stat(filename).st_size
 
-    return send_file(complete_filename)
+    file_size = os.stat(complete_filename).st_size
+
+    return create_file_url_response(complete_filename, file_size)
 
 
 @app.route('/decrypt/file/elgamal', methods=['POST'])
@@ -86,7 +86,7 @@ def decrypt_file_elgamal():
 
     complete_filename = create_file_response(
         filename, decrypted_context)
-    
-    file_size = os.stat(filename).st_size
 
-    return send_file(complete_filename)
+    file_size = os.stat(complete_filename).st_size
+
+    return create_file_url_response(complete_filename, file_size)
