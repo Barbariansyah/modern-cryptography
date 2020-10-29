@@ -90,3 +90,9 @@ def decrypt_file_elgamal():
     file_size = os.stat(complete_filename).st_size
 
     return create_file_url_response(complete_filename, file_size. time_needed)
+
+@app.route('/download', methods=['POST'])
+def downloadFile():
+    json_request = request.get_json()
+    path = json_request['path']
+    return send_file(path, as_attachment=True)
