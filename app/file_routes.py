@@ -89,7 +89,7 @@ def decrypt_file_elgamal():
 
     file_size = os.stat(complete_filename).st_size
 
-    return create_file_url_response(complete_filename, file_size. time_needed)
+    return create_file_url_response(complete_filename, file_size, time_needed)
 
 @app.route('/download', methods=['POST'])
 def downloadFile():

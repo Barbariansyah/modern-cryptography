@@ -69,8 +69,6 @@ def decrypt_text_elgamal():
     message = json_request['message']
     private_key = json_request['private_key']
 
-    message = bytes(message, 'utf-8')
-
     start_time = time.time()
     decrypted_message = decrypt_elgamal(message, private_key)
     time_needed = time.time() - start_time
