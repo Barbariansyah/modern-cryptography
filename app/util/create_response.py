@@ -28,8 +28,8 @@ def create_file_response(filename, cipher_text):
     return complete_filename
 
 
-def create_file_url_response(filename, file_size):
-    return ({'file_loc': filename, 'file_size': file_size})
+def create_file_url_response(filename, file_size, time_needed):
+    return ({'file_loc': filename, 'file_size': file_size, 'time': time_needed})
 
 
 def create_key_response(pub_key, pri_key, time_needed):

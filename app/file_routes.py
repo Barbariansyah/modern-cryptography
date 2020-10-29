@@ -31,7 +31,7 @@ def encrypt_file_rsa():
 
     file_size = os.stat(complete_filename).st_size
 
-    return create_file_url_response(complete_filename, file_size)
+    return create_file_url_response(complete_filename, file_size, time_needed)
 
 
 @app.route('/encrypt/file/elgamal', methods=['POST'])
@@ -49,7 +49,7 @@ def encrypt_file_elgamal():
 
     file_size = os.stat(complete_filename).st_size
 
-    return create_file_url_response(complete_filename, file_size)
+    return create_file_url_response(complete_filename, file_size, time_needed)
 
 
 ''' File decryption '''
@@ -70,7 +70,7 @@ def decrypt_file_rsa():
 
     file_size = os.stat(complete_filename).st_size
 
-    return create_file_url_response(complete_filename, file_size)
+    return create_file_url_response(complete_filename, file_size, time_needed)
 
 
 @app.route('/decrypt/file/elgamal', methods=['POST'])
@@ -89,4 +89,4 @@ def decrypt_file_elgamal():
 
     file_size = os.stat(complete_filename).st_size
 
-    return create_file_url_response(complete_filename, file_size)
+    return create_file_url_response(complete_filename, file_size. time_needed)
